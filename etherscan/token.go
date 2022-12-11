@@ -27,7 +27,7 @@ func (c *Configuration) GetTokenInfoByContractAddress(contractAddress string) (*
     return &etherscanResponse, resBody, nil
 }
 
-func (c *Configuration) GetTokenTransfersByContractAddress(contractAddress string, address string,
+func (c *Configuration) GetTokenTransfersByContractAddress(address string, contractAddress string,
     page string, offset string, startBlock string, endBlock string, sort string) (*TokenInfoByContractAddress, []byte, error) {
 
     values := url.Values{}
@@ -47,6 +47,34 @@ func (c *Configuration) GetTokenTransfersByContractAddress(contractAddress strin
     }
 
     var etherscanResponse TokenInfoByContractAddress
+
+    unmarshalError := json.Unmarshal(resBody, &etherscanResponse)
+    if unmarshalError != nil {
+        return nil, resBody, unmarshalError
+    }
+
+    return &etherscanResponse, resBody, nil
+}
+
+func (c *Configuration) GetTokenTransactions(address string,
+    page string, offset string, startBlock string, endBlock string, sort string) (*TokenTransactions, []byte, error) {
+
+    values := url.Values{}
+    values.Add("module", "account")
+    values.Add("action", "txlist")
+    values.Add("address", address)
+    values.Add("startblock", startBlock)
+    values.Add("endblock", endBlock)
+    values.Add("page", page)
+    values.Add("offset", offset)
+    values.Add("sort", sort)
+
+    resBody, err := doGetRequest(values, c)
+    if err != nil {
+        return nil, resBody, err
+    }
+
+    var etherscanResponse TokenTransactions
 
     unmarshalError := json.Unmarshal(resBody, &etherscanResponse)
     if unmarshalError != nil {
