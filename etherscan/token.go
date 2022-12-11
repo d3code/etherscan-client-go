@@ -5,7 +5,7 @@ import (
     "net/url"
 )
 
-func (c *client) GetTokenInfoByContractAddress(contractAddress string) (*TokenInfoByContractAddress, []byte, error) {
+func (c *Configuration) GetTokenInfoByContractAddress(contractAddress string) (*TokenInfoByContractAddress, []byte, error) {
 
     values := url.Values{}
     values.Add("module", "token")
@@ -27,7 +27,7 @@ func (c *client) GetTokenInfoByContractAddress(contractAddress string) (*TokenIn
     return &etherscanResponse, resBody, nil
 }
 
-func (c *client) GetTokenTransfersByContractAddress(contractAddress string, address string,
+func (c *Configuration) GetTokenTransfersByContractAddress(contractAddress string, address string,
     page string, offset string, startBlock string, endBlock string, sort string) (*TokenInfoByContractAddress, []byte, error) {
 
     values := url.Values{}
