@@ -4,7 +4,7 @@ type Transactions struct {
     Status  string `json:"status"`
     Message string `json:"message"`
     Result  []struct {
-        BlockNumber       int    `json:"blockNumber"`
+        BlockNumber       string `json:"blockNumber"`
         TimeStamp         int    `json:"timeStamp"`
         Hash              string `json:"hash"`
         Nonce             string `json:"nonce"`
@@ -21,7 +21,7 @@ type Transactions struct {
         ContractAddress   string `json:"contractAddress"`
         CumulativeGasUsed string `json:"cumulativeGasUsed"`
         GasUsed           string `json:"gasUsed"`
-        Confirmations     int    `json:"confirmations"`
+        Confirmations     string `json:"confirmations"`
         MethodId          string `json:"methodId"`
         FunctionName      string `json:"functionName"`
     } `json:"result"`
