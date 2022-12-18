@@ -6,7 +6,7 @@ import (
 )
 
 func (c *Configuration) GetTokenTransactions(address string, contractAddress string,
-    page string, offset string, startBlock string, endBlock string, sort string) (*TokenInfoByContractAddress, []byte, error) {
+    page string, offset string, startBlock string, endBlock string, sort string) (*TokenTransactions, []byte, error) {
 
     values := url.Values{}
     values.Add("module", "account")
@@ -24,7 +24,7 @@ func (c *Configuration) GetTokenTransactions(address string, contractAddress str
         return nil, resBody, err
     }
 
-    var etherscanResponse TokenInfoByContractAddress
+    var etherscanResponse TokenTransactions
 
     unmarshalError := json.Unmarshal(resBody, &etherscanResponse)
     if unmarshalError != nil {
