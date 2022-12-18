@@ -5,29 +5,7 @@ import (
     "net/url"
 )
 
-func (c *Configuration) GetTokenInfoByContractAddress(contractAddress string) (*TokenInfoByContractAddress, []byte, error) {
-
-    values := url.Values{}
-    values.Add("module", "token")
-    values.Add("action", "tokeninfo")
-    values.Add("contractaddress", contractAddress)
-
-    resBody, err := doGetRequest(values, c)
-    if err != nil {
-        return nil, resBody, err
-    }
-
-    var etherscanResponse TokenInfoByContractAddress
-
-    unmarshalError := json.Unmarshal(resBody, &etherscanResponse)
-    if unmarshalError != nil {
-        return nil, resBody, unmarshalError
-    }
-
-    return &etherscanResponse, resBody, nil
-}
-
-func (c *Configuration) GetTokenTransfersByContractAddress(address string, contractAddress string,
+func (c *Configuration) GetTokenTransactions(address string, contractAddress string,
     page string, offset string, startBlock string, endBlock string, sort string) (*TokenInfoByContractAddress, []byte, error) {
 
     values := url.Values{}
@@ -56,8 +34,8 @@ func (c *Configuration) GetTokenTransfersByContractAddress(address string, contr
     return &etherscanResponse, resBody, nil
 }
 
-func (c *Configuration) GetTokenTransactions(address string,
-    page string, offset string, startBlock string, endBlock string, sort string) (*TokenTransactions, []byte, error) {
+func (c *Configuration) GetTransactions(address string,
+    page string, offset string, startBlock string, endBlock string, sort string) (*Transactions, []byte, error) {
 
     values := url.Values{}
     values.Add("module", "account")
@@ -74,7 +52,7 @@ func (c *Configuration) GetTokenTransactions(address string,
         return nil, resBody, err
     }
 
-    var etherscanResponse TokenTransactions
+    var etherscanResponse Transactions
 
     unmarshalError := json.Unmarshal(resBody, &etherscanResponse)
     if unmarshalError != nil {
