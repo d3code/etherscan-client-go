@@ -5,7 +5,7 @@ type Transactions struct {
     Message string `json:"message"`
     Result  []struct {
         BlockNumber       string `json:"blockNumber"`
-        TimeStamp         int    `json:"timeStamp"`
+        TimeStamp         string `json:"timeStamp"`
         Hash              string `json:"hash"`
         Nonce             string `json:"nonce"`
         BlockHash         string `json:"blockHash"`
@@ -15,7 +15,7 @@ type Transactions struct {
         Value             string `json:"value"`
         Gas               string `json:"gas"`
         GasPrice          string `json:"gasPrice"`
-        IsError           bool   `json:"isError"`
+        IsError           string `json:"isError"`
         TxreceiptStatus   string `json:"txreceipt_status"`
         Input             string `json:"input"`
         ContractAddress   string `json:"contractAddress"`
